@@ -19,7 +19,7 @@ const Login = () => {
 
   const submitHandler = async (values, form) => {
     const res = await axios.post(
-      "http://localhost:5000/api/v1/auth/login",
+      "https://intense-savannah-60599.herokuapp.com/api/v1/auth/login",
       values
     );
     if (res.data.error) {
