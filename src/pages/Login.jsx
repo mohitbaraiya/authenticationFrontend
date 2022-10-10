@@ -44,7 +44,7 @@ const Login = () => {
           alt="Your Company"
         />
         <h2 className="mt-6 text-3xl font-bold tracking-tight text-center text-gray-900">
-          Sign in to account
+          Sign in to your account
         </h2>
       </div>
 
