@@ -19,7 +19,7 @@ const Signup = () => {
 
   const submitHandler = async (values, form) => {
     const res = await axios.post(
-      "https://intense-savannah-60599.herokuapp.com/api/v1/auth/signup",
+      "http://localhost:5000/api/v1/auth/signup",
       values
     );
     console.log(res);

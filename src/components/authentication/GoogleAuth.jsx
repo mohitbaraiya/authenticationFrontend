@@ -21,7 +21,7 @@ const GoogleAuth = () => {
     console.log(response);
     console.log();
     let data = await axios.post(
-      "https://intense-savannah-60599.herokuapp.com/api/v1/auth/google-auth/recieve-token",
+      "http://localhost:5000/api/v1/auth/google-auth/recieve-token",
       {
         id_token: response.getAuthResponse().id_token,
       }
