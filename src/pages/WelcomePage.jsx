@@ -12,6 +12,9 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { userSelector } from "../stores/slices/selectors/authSelector";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "../stores/slices/authSlice";
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -22,9 +25,9 @@ const navigation = [
   { name: "Reports", href: "#", icon: ChartBarIcon, current: false },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Your Profile", onClick: () => {} },
+  { name: "Settings", onClick: () => {} },
+  { name: "Sign out", onClick: () => {} },
 ];
 
 function classNames(...classes) {
@@ -33,6 +36,12 @@ function classNames(...classes) {
 
 export default function WelcomePage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const { picture, username } = useSelector(userSelector);
+  const dispatch = useDispatch();
+  userNavigation[2].onClick = () => {
+    dispatch(logOut);
+  };
 
   return (
     <>
@@ -229,8 +238,8 @@ export default function WelcomePage() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="w-8 h-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
+                        src={picture}
+                        alt="profile"
                       />
                     </Menu.Button>
                   </div>
@@ -247,15 +256,17 @@ export default function WelcomePage() {
                       {userNavigation.map((item) => (
                         <Menu.Item key={item.name}>
                           {({ active }) => (
-                            <a
-                              href={item.href}
+                            <button
+                              // href={item.href}
+                              type="button"
+                              onClick={item.onclick}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
                               {item.name}
-                            </a>
+                            </button>
                           )}
                         </Menu.Item>
                       ))}
@@ -275,9 +286,7 @@ export default function WelcomePage() {
               </div>
               <div className="px-4 mx-auto max-w-7xl sm:px-6 md:px-8">
                 {/* Replace with your content */}
-                <div className="py-4">
-                  <div className="border-4 border-gray-200 border-dashed rounded-lg h-96" />
-                </div>
+                <div>hello {username}</div>
                 {/* /End replace */}
               </div>
             </div>

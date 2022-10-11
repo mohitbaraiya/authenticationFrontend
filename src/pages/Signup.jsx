@@ -19,19 +19,27 @@ const Signup = () => {
 
   const submitHandler = async (values, form) => {
     const res = await axios.post(
-      "https://intense-savannah-60599.herokuapp.com/api/v1/auth/signup",
+      "http://localhost:5000/api/v1/auth/signup",
       values
     );
-    console.log(res);
-    if (res.data.error) {
-      res.data.error.forEach((error) => {
+    console.log(res.data);
+    if (res.data.errors) {
+      res.data.errors.forEach((error) => {
+        console.log(error.msg);
         toast(error.msg);
       });
     } else {
-      toast(res.message);
-      if (res.token) {
+      console.log("no errors");
+      toast(res.data.message);
+      if (res.data.token) {
         navigate("/welcome");
-        dispatch(changeLoginStatus({ isLogin: true, token: res.token }));
+        dispatch(
+          changeLoginStatus({
+            isLogin: true,
+            token: res.token,
+            user: res.data.user,
+          })
+        );
       }
     }
   };

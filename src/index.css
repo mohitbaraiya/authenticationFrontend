@@ -2,3 +2,7 @@
 @tailwind utilities;
 @tailwind variants;
 @tailwind components;
+
+.google_button > div {
+  display: none;
+}
